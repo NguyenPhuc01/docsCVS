@@ -32,34 +32,67 @@ const Wrapper = styled('div')`
 const Content = styled('main')`
   display: flex;
   flex-grow: 1;
-  margin: 0px 88px;
+  margin: 80px 88px 0px 88px;
   padding-top: 3rem;
   background: ${({ theme }) => theme.colors.background};
-
+  table {
+    width: 100%;
+    border-spacing: 0;
+    display: block;
+    border-collapse: collapse;
+    overflow: auto;
+  }
   table tr {
     background: ${({ theme }) => theme.colors.background};
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (min-width: 1023px) and (max-width: 1199px) {
     padding-left: 0;
-    margin: 0 10px;
+
     padding-top: 3rem;
+    margin: 80px 88px 0px 88px;
+    display: block;
+    width: 500px;
+  }
+  @media only screen and (max-width: 739px) {
+    margin: 0px;
+  }
+  @media only screen and (min-width: 740px) and (max-width: 1023px) {
+    margin: 0px 10px;
+    table {
+      width: 100%;
+      border-spacing: 0;
+      display: block;
+      border-collapse: collapse;
+      overflow: auto;
+    }
+
+    /* 
+    table {
+      box-sizing: border-box;
+      border-spacing: 0px;
+      display: block;
+      width: 100%;
+      overflow: auto;
+    } */
   }
 `;
 
 const MaxWidth = styled('div')`
   @media only screen and (max-width: 50rem) {
-    width: 100%;
+    display: block;
+    width: 350px;
+    margin: 80px 0px 0px 20px;
     position: relative;
   }
 `;
 
-const LeftSideBarWidth = styled('div')`
-  width: 298px;
-`;
-
 const RightSideBarWidth = styled('div')`
   width: 224px;
+`;
+
+const LeftSideBarWidth = styled('div')`
+  /* width: 224px; */
 `;
 
 const Layout = ({ children, location }) => (

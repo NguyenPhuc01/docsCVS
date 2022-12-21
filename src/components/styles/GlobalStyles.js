@@ -40,6 +40,13 @@ export const baseStyles = css`
   body {
     font-family: 'Roboto';
   }
+  .showRightNavbar {
+    display: none;
+  }
+  .btnVi {
+  }
+  .btnEn {
+  }
   .visibleMobile {
     display: none;
   }
@@ -58,6 +65,7 @@ export const baseStyles = css`
   }
   .displayInline {
     display: inline-block;
+    width: 200px !important;
   }
   .navBarToggle {
     border: 0px solid #fff;
@@ -158,13 +166,13 @@ export const baseStyles = css`
   }
   .searchInput {
     width: 100%;
-    background-color: rgba(28,211,198,.12) !important;
+    background-color: rgba(28, 211, 198, 0.12) !important;
     border-width: 0 !important;
-    color: #C2C2C2;
+    color: #c2c2c2;
     padding: 10px;
     border-radius: 5px;
     color: #fff;
-    opacity: .6;
+    opacity: 0.6;
     padding-left: 38px;
     max-width: 600px;
   }
@@ -257,7 +265,7 @@ export const baseStyles = css`
     padding: 0 !important;
   }
   .navBarDefault {
-    background-color: #001934;
+    background-color: #fff;
     border-radius: 0;
     border-top: 0;
     margin-bottom: 0;
@@ -270,11 +278,12 @@ export const baseStyles = css`
     -o-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
     z-index: 1;
     padding: 15px;
-    position: relative;
+    position: fixed;
+    width: 100%;
     height: 80px;
   }
   .navBarHeader {
-    min-width: 335px;
+    min-width: 22%;
     padding-right: 20px;
     display: flex;
     align-items: center;
@@ -298,7 +307,7 @@ export const baseStyles = css`
   }
   .navBarUL li a {
     font-family: 'Roboto';
-    color: #fff !important;
+    color: black !important;
     font-size: 16px;
     font-weight: 500;
     line-height: 1em;
@@ -338,7 +347,8 @@ export const baseStyles = css`
   .socialWrapper li a {
     display: contents;
   }
-  .discordBtn, .twitterBtn {
+  .discordBtn,
+  .twitterBtn {
     border-radius: 4px;
     border: solid 1px #d1d2d3;
     background-color: #f1f5f8;
@@ -349,7 +359,7 @@ export const baseStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: .8;
+    opacity: 0.8;
     cursor: pointer;
   }
   .twitterBtn img {
@@ -358,7 +368,8 @@ export const baseStyles = css`
   .discordBtn img {
     width: 10px !important;
   }
-  .discordBtn:hover, .twitterBtn:hover {
+  .discordBtn:hover,
+  .twitterBtn:hover {
     opacity: 1;
   }
   .discordBtn {
@@ -420,6 +431,8 @@ export const baseStyles = css`
   .sideBarUL {
     margin-top: 32px;
   }
+  .sideBarUL ul {
+  }
 
   .sideBarUL li {
     list-style-type: none;
@@ -450,9 +463,10 @@ export const baseStyles = css`
   }
 
   .hideFrontLine .active > a {
-    background-color: #1ed3c6;
-    color: #fff !important;
+    color: red !important;
+    height: 100%;
   }
+
   .firstLevel ul li .collapser svg path {
     fill: #fff !important;
   }
@@ -470,7 +484,7 @@ export const baseStyles = css`
   }
 
   .sideBarUL .item > a {
-    color: #1ED3C6;
+    color: #1ed3c6;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -568,10 +582,10 @@ export const baseStyles = css`
   }
 
   /* tables.css */
-  table {
-    padding: 0;
-  }
 
+  .firstLevel ul li .collapser svg path {
+    fill: black !important;
+  }
   table tr {
     border-top: 1px solid #cccccc;
     margin: 0;
@@ -730,11 +744,20 @@ export const baseStyles = css`
   }
   .topnav {
     -webkit-transition: top 0.5s, bottom 0.5s;
+    width: 100%;
+    height: 80px;
   }
 
   @media (max-width: 767px) {
     .formElement svg path {
       fill: #001934;
+    }
+    .sideBarUL {
+      margin-top: 82px;
+    }
+    .btnVi,
+    .btnEn {
+      display: none;
     }
     .visibleMobileView {
       display: block !important;
@@ -805,23 +828,21 @@ export const baseStyles = css`
 
     .navBarDefault {
       display: block;
-      height: auto;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      ${'' /* height: auto; */}
     }
 
     .navBarToggle {
       margin-right: 0;
       display: block;
-      position: absolute;
+      ${
+        '' /* position: absolute;
       left: 11px;
-      top: 15px;
+      top: 15px; */
+      }
       background: #fff;
-    }
-
-    .navBarHeader {
-      display: flex;
-      min-width: auto;
-      padding-right: 0;
-      align-items: center;
     }
 
     .navBarBrand {
@@ -865,10 +886,16 @@ export const baseStyles = css`
     }
   }
 
+  @media (min-width: 740px) and (max-width: 1199px) {
+    .showRightNavbar {
+      display: block;
+    }
+  }
   @media (min-width: 768px) and (max-width: 991px) {
     .navBarDefault {
       padding: 10px;
     }
+
     .navBarBrand {
       font-size: 22px;
     }

@@ -1,18 +1,16 @@
 import styled from '@emotion/styled';
 
 export const Sidebar = styled('aside')`
-  width: 100%;
+  width: 224px;
   border-right: 1px solid #ede7f3;
   height: 100vh;
   overflow: auto;
   position: fixed;
-  padding-left: 24px;
   position: -webkit-sticky;
   position: -moz-sticky;
-  position: sticky;
-  top: 0;
+  top: 80px;
 
-  background: ${props => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.background};
 
   .rightSideTitle {
     font-size: 10px;
@@ -24,11 +22,10 @@ export const Sidebar = styled('aside')`
     border-left: 1px solid #e6ecf1;
     border-left-color: rgb(230, 236, 241);
 
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 
   .rightSideBarUL {
-    margin-top: 32px;
   }
 
   .rightSideBarUL li {
@@ -43,12 +40,20 @@ export const Sidebar = styled('aside')`
     line-height: 1.5;
     padding: 7px 24px 7px 16px;
 
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
+  }
+  @media only screen and (min-width: 1023px) and (max-width: 1199px) {
+    width: 182px;
+    right: 0px;
   }
 
   @media only screen and (max-width: 50rem) {
-    width: 100%;
-    position: relative;
+    /* width: 100%; */
+    width: 160px;
+    right: 0px;
+
+    /* position: sticky; */
+    /* position: fixed; */
   }
 `;
 
@@ -67,7 +72,7 @@ export const ListItem = styled(({ className, active, level, ...props }) => {
     color: #5c6975;
     text-decoration: none;
     font-weight: ${({ level }) => (level === 0 ? 700 : 400)};
-    padding: 0.45rem 0 0.45rem ${props => 2 + (props.level || 0) * 1}rem;
+    padding: 0.45rem 0 0.45rem ${(props) => 2 + (props.level || 0) * 1}rem;
     display: block;
     position: relative;
 
@@ -75,7 +80,7 @@ export const ListItem = styled(({ className, active, level, ...props }) => {
       color: #1ed3c6 !important;
     }
 
-    ${props =>
+    ${(props) =>
       props.active &&
       `
       color: #1ED3C6;

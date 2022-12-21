@@ -4,6 +4,8 @@ import Link from './link';
 import { StyledNextPrevious } from './styles/PageNavigationButtons';
 
 const NextPrevious = ({ mdx, nav }) => {
+  console.log("🚀 ~ file: NextPrevious.js:7 ~ NextPrevious ~ nav", nav)
+  console.log("🚀 ~ file: NextPrevious.js:7 ~ NextPrevious ~ mdx", mdx)
   let currentIndex;
 
   const currentPaginationInfo = nav.map((el, index) => {
@@ -11,7 +13,7 @@ const NextPrevious = ({ mdx, nav }) => {
       currentIndex = index;
     }
   });
-
+console.log({currentIndex});
   const nextInfo = {};
 
   const previousInfo = {};

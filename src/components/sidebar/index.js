@@ -16,7 +16,6 @@ const ListItem = styled(({ className, active, level, ...props }) => {
   );
 })`
   list-style: none;
-
   a {
     color: #5c6975;
     text-decoration: none;
@@ -24,11 +23,9 @@ const ListItem = styled(({ className, active, level, ...props }) => {
     padding: 0.45rem 0 0.45rem ${(props) => 2 + (props.level || 0) * 1}rem;
     display: block;
     position: relative;
-
     &:hover {
       color: #1ed3c6 !important;
     }
-
     ${(props) =>
       props.active &&
       `
@@ -46,7 +43,7 @@ const ListItem = styled(({ className, active, level, ...props }) => {
 `;
 
 const Sidebar = styled('aside')`
-  width: 100%;
+  width: 270px;
   height: 100vh;
   overflow: auto;
   position: fixed;
@@ -57,20 +54,20 @@ const Sidebar = styled('aside')`
   top: 0;
   padding-right: 0;
   -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
-
   @media only screen and (max-width: 1023px) {
     width: 100%;
     /* position: relative; */
-    height: 100vh;
-  }
-
-  @media (min-width: 767px) and (max-width: 1023px) {
-    padding-left: 0;
-  }
-
-  @media only screen and (max-width: 767px) {
-    padding-left: 0px;
     height: auto;
+  }
+  @media (min-width: 740px) and (max-width: 1199px) {
+    width: 200px;
+  }
+  @media only screen and (max-width: 739px) {
+    padding-left: 0px;
+    background-color: #fff;
+    /* width: 224px; */
+
+    /* height: 100vh; */
   }
 `;
 
@@ -81,7 +78,6 @@ const Divider = styled((props) => (
 ))`
   list-style: none;
   padding: 0.5rem 0;
-
   hr {
     margin: 0;
     padding: 0;
@@ -118,7 +114,7 @@ const SidebarLayout = ({ location }) => (
           <ul className={'sideBarUL'}>
             <Tree edges={allMdx.edges} />
             {config.sidebar.links && config.sidebar.links.length > 0 && <Divider />}
-            {config.sidebar.links.map((link, key) => {
+            {/* {config.sidebar.links.map((link, key) => {
               if (link.link !== '' && link.text !== '') {
                 return (
                   <ListItem key={key} to={link.link}>
@@ -127,7 +123,7 @@ const SidebarLayout = ({ location }) => (
                   </ListItem>
                 );
               }
-            })}
+            })} */}
           </ul>
         </Sidebar>
       );

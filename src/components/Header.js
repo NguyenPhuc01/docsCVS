@@ -1,16 +1,20 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
 import GitHubButton from 'react-github-btn';
-import Link from './link';
+// import Link from './link';
 import Loadable from 'react-loadable';
 
 import config from '../../config.js';
 import LoadingProvider from './mdxComponents/loading';
 import { DarkModeSwitch } from './DarkModeSwitch';
+import Sidebar from './sidebar';
+import { Button, Divider } from 'antd';
+import SidebarLayout from './sidebar';
+import Tree from './sidebar/tree.js';
 
+// import SidebarLayout from './sidebar';
 const help = require('./images/help.svg');
-
 const isSearchEnabled = config.header.search && config.header.search.enabled ? true : false;
 
 let searchIndices = [];
@@ -22,8 +26,6 @@ if (isSearchEnabled && config.header.search.indexName) {
     hitComp: `PageHit`,
   });
 }
-
-import Sidebar from './sidebar';
 
 const LoadableComponent = Loadable({
   loader: () => import('./search/index'),
@@ -52,30 +54,34 @@ const StyledBgDiv = styled('div')`
     display: block;
   }
 `;
-
+const SideBarWidth = styled('div')`
+  width: 100% !important;
+  height: 80px !important;
+  /* display: flex;
+  align-items: center; */
+`;
+const WrapLinkApi = styled('li')`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
 const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
   <StaticQuery
     query={graphql`
-      query headerTitleQuery {
-        site {
-          siteMetadata {
-            headerTitle
-            githubUrl
-            helpUrl
-            tweetText
-            logo {
-              link
-              image
-            }
-            headerLinks {
-              link
-              text
+      query {
+        allMdx {
+          edges {
+            node {
+              fields {
+                slug
+                title
+              }
             }
           }
         }
       }
     `}
-    render={(data) => {
+    render={({ allMdx }) => {
       const logoImg = require('./images/logo.svg');
 
       const twitter = require('./images/twitter.svg');
@@ -84,108 +90,51 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
 
       const twitterBrandsBlock = require('./images/twitter-brands-block.svg');
 
-      const {
-        site: {
-          siteMetadata: { headerTitle, githubUrl, helpUrl, tweetText, logo, headerLinks },
-        },
-      } = data;
-
-      const finalLogoLink = logo.link !== '' ? logo.link : 'https://hasura.io/';
-
       return (
         <div className={'navBarWrapper'}>
           <nav className={'navBarDefault'}>
             <div className={'navBarHeader'}>
-              <Link to={finalLogoLink} className={'navBarBrand'}>
+              <Link to="http://localhost:8000/" className={'navBarBrand'}>
                 <img
                   className={'img-responsive displayInline'}
-                  src={logo.image !== '' ? logo.image : logoImg}
+                  src="https://www.docs.computervision.com.vn/static/logo-cvs-8d7e167d315ede0146bebe3e494a5898.svg"
                   alt={'logo'}
                 />
               </Link>
-              <div
-                className={'headerTitle displayInline'}
-                dangerouslySetInnerHTML={{ __html: headerTitle }}
-              />
             </div>
-            {config.header.social ? (
-              <ul
-                className="socialWrapper visibleMobileView"
-                dangerouslySetInnerHTML={{ __html: config.header.social }}
-              ></ul>
-            ) : null}
-            {isSearchEnabled ? (
-              <div className={'searchWrapper hiddenMobile navBarUL'}>
-                <LoadableComponent collapse={true} indices={searchIndices} />
-              </div>
-            ) : null}
+
             <div id="navbar" className={'topnav'}>
               <div className={'visibleMobile'}>
                 <Sidebar location={location} />
                 <hr />
               </div>
-              <ul className={'navBarUL navBarNav navBarULRight'}>
-                {headerLinks.map((link, key) => {
-                  if (link.link !== '' && link.text !== '') {
-                    return (
-                      <li key={key}>
-                        <a
-                          className="sidebarLink"
-                          href={link.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          dangerouslySetInnerHTML={{ __html: link.text }}
-                        />
-                      </li>
-                    );
-                  }
-                })}
-                {helpUrl !== '' ? (
-                  <li>
-                    <a href={helpUrl}>
-                      <img src={help} alt={'Help icon'} />
-                    </a>
-                  </li>
-                ) : null}
-
-                {tweetText !== '' ? (
-                  <li>
-                    <a
-                      href={'https://twitter.com/intent/tweet?&text=' + tweetText}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img className={'shareIcon'} src={twitter} alt={'Twitter'} />
-                    </a>
-                  </li>
-                ) : null}
-                {tweetText !== '' || githubUrl !== '' ? (
-                  <li className="divider hiddenMobile"></li>
-                ) : null}
-                {config.header.social ? (
-                  <li className={'hiddenMobile'}>
-                    <ul
-                      className="socialWrapper"
-                      dangerouslySetInnerHTML={{ __html: config.header.social }}
-                    ></ul>
-                  </li>
-                ) : null}
-                {githubUrl !== '' ? (
-                  <li className={'githubBtn'}>
-                    <GitHubButton
-                      href={githubUrl}
-                      data-show-count="true"
-                      aria-label="Star on GitHub"
-                    >
-                      Star
-                    </GitHubButton>
-                  </li>
-                ) : null}
+              <ul
+                className={'navBarUL navBarNav navBarULRight'}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: '80px',
+                  margin: '0px',
+                }}
+              >
+                <WrapLinkApi>
+                  <Link to="/api-v1">Api v1</Link>
+                  <Link to="/api-v2">Api v2</Link>
+                </WrapLinkApi>
                 <li>
-                  <DarkModeSwitch
+                  <Button type="danger" style={{ marginRight: '15px' }} className={'btnVi'}>
+                    Vi
+                  </Button>
+                  <Button style={{ marginRight: '15px' }} className={'btnEn'}>
+                    En
+                  </Button>
+
+                  {/* <DarkModeSwitch
                     isDarkThemeActive={isDarkThemeActive}
                     toggleActiveTheme={toggleActiveTheme}
-                  />
+                  /> */}
                 </li>
               </ul>
             </div>
@@ -203,12 +152,15 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
                 <span className={'iconBar'}></span>
                 <span className={'iconBar'}></span>
               </span>
-            </div>
-            {isSearchEnabled ? (
-              <div className={'searchWrapper'}>
-                <LoadableComponent collapse={true} indices={searchIndices} />
+              <div style={{ marginLeft: '15px' }}>
+                <Link to="http://localhost:8000/" className={'navBarBrand'}>
+                  <img
+                    src="https://www.docs.computervision.com.vn/static/logo-cvs-8d7e167d315ede0146bebe3e494a5898.svg"
+                    alt={'logo'}
+                  />
+                </Link>
               </div>
-            ) : null}
+            </div>
           </StyledBgDiv>
         </div>
       );

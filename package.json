@@ -17,6 +17,7 @@
     "@styled-icons/fa-brands": "^10.26.0",
     "@styled-icons/fa-solid": "^10.32.0",
     "algoliasearch": "^4.9.3",
+    "antd": "^4.24.4",
     "dotenv": "^8.5.1",
     "emotion": "^11.0.0",
     "emotion-server": "^11.0.0",
@@ -60,7 +61,7 @@
     "build": "gatsby build --prefix-paths",
     "format": "prettier --write \"src/**/*.{js,jsx,css,json}\"",
     "lint": "eslint --fix \"src/**/*.{js,jsx}\"",
-    "develop": "NODE_OPTIONS=--openssl-legacy-provider gatsby develop",
+    "develop": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
